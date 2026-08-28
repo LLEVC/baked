@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "baked",
+	"version": "${version}",
+	"name": "baked",
+	"description": "a minecraft mod about weapons",
+	"authors": [
+		"LLEVC"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/project/ballistics-",
+		"sources": "https://github.com/LLEVC/ballistics"
+	},
+	"license": "CC0-4.0",
+	"icon": "assets/baked/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"llevc.baked.Baked"
+		],
+		"client": [
+			"llevc.baked.BakedClient"
+		],
+		"fabric-datagen": [
+			"llevc.baked.BakedDataGenerator"
+		]
+	},
+	"mixins": [
+		"baked.mixins.json",
+		{
+			"config": "baked.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
