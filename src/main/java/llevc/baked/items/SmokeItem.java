@@ -6,9 +6,12 @@ import llevc.baked.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SpellParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.CommonColors;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -72,21 +75,16 @@ public class SmokeItem extends Item {
                 releaseUsing(itemStack,level,livingEntity,i);
             }
         }
-    } 
-
-    public void spawnSmokeParticles(Level level, LivingEntity livingEntity) {
-        if (smokeParticles()) {
-            for (int j = 0; j < 5; j++) {
-                ParticleUtils.spawnParticleBelow(level, new BlockPos((int) livingEntity.getEyePosition().x, (int) livingEntity.getEyePosition().y, (int) livingEntity.getEyePosition().z), RandomSource.create(), ParticleTypes.POOF);
-            }
-        }
     }
 
     public void sendSmokeParticles(ServerLevel serverLevel, LivingEntity livingEntity) {
         if (smokeParticles()) {
             for (int j = 0; j < 5; j++) {
                 RandomSource randomSource = RandomSource.create();
-                serverLevel.sendParticles(ParticleTypes.POOF,livingEntity.getEyePosition().x+randomSource.nextDouble()-0.5, livingEntity.getEyePosition().y, livingEntity.getEyePosition().z+randomSource.nextDouble()-0.5,0,0,0,0,0);
+                ItemStack mainhandStack = livingEntity.getItemInHand(InteractionHand.MAIN_HAND);
+                ItemStack offhandStack = livingEntity.getItemInHand(InteractionHand.OFF_HAND);
+                int color = mainhandStack.has(DataComponents.POTION_CONTENTS) ? mainhandStack.getOrDefault(DataComponents.POTION_CONTENTS,PotionContents.EMPTY).getColorOr(CommonColors.LIGHT_GRAY) : offhandStack.has(DataComponents.POTION_CONTENTS) ? offhandStack.getOrDefault(DataComponents.POTION_CONTENTS,PotionContents.EMPTY).getColorOr(CommonColors.LIGHT_GRAY) : CommonColors.LIGHT_GRAY;
+                serverLevel.sendParticles(new DustParticleOptions(color,1.0f),livingEntity.getEyePosition().x+randomSource.nextDouble()-0.5, livingEntity.getEyePosition().y, livingEntity.getEyePosition().z+randomSource.nextDouble()-0.5,0,0,0,0,0);
                 //ParticleUtils.spawnParticleBelow(level, new BlockPos((int) livingEntity.getEyePosition().x, (int) livingEntity.getEyePosition().y, (int) livingEntity.getEyePosition().z), RandomSource.create(), ParticleTypes.POOF);
             }
         }

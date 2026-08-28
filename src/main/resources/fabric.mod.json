@@ -3,13 +3,13 @@
 	"id": "baked",
 	"version": "${version}",
 	"name": "baked",
-	"description": "a minecraft mod about weapons",
+	"description": "dope",
 	"authors": [
 		"LLEVC"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/project/ballistics-",
-		"sources": "https://github.com/LLEVC/ballistics"
+		"homepage": "https://modrinth.com/project/ballistics-baked",
+		"sources": "https://github.com/LLEVC/baked"
 	},
 	"license": "CC0-4.0",
 	"icon": "assets/baked/icon.png",
