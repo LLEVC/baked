@@ -141,7 +141,7 @@ public class ModItems {
                 output.accept(PotionContents.createItemStack(cartridge,Holder.direct(hey)));
             }
         }
-        output.accept(snortable);
+        //output.accept(snortable);
         //for (int i = 0; i < BuiltInRegistries.BLOCK.size(); i++) {
         //    Optional<Holder.Reference<Block>> wchat = BuiltInRegistries.BLOCK.get(i);
         //    if (wchat.isPresent()) {
